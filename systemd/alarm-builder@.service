@@ -1,0 +1,14 @@
+[Unit]
+Description=Build ArchLinuxARM for project %i
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=builder
+WorkingDirectory=/srv/builder/%i
+ExecStart=/bin/bash -e /srv/builder/%i/common/systemd/builder.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
