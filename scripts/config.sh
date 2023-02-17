@@ -6,7 +6,6 @@
 name_distro='ArchLinuxARM-aarch64'
 dir_aur='aur'
 dir_pkg='pkg'
-dir_booting='booting'
 dir_releases='releases'
 disk_label='msdos'
 disk_size='2G' # iB omitted, but remember they stand for MiB or GiB (1024 units), not the 1000 units
