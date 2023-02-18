@@ -26,7 +26,7 @@ locales_enable=(
 locale_use='en_GB.UTF-8'
 link_vi_to_vim='yes'
 sudo_allow_wheel='yes'
-ssh_root_without_password='yes'
+ssh_root_with_password='yes'
 root_password='alarm_please_change_me'
 enable_systemd_units=(
   'systemd-networkd.service'
