@@ -1,7 +1,11 @@
-# This should not be executed by the outer project to setup stuffs
-# suffix .sh since it will be parsed by bash, and surely it can use bash syntax
+# This should be executed by the outer project to setup stuffs before applying the project-specific configs
 
-# No sanity check will be performed on these, it's the outer project maintainer's duty to make sure they are OK
+# - Why in scripts and suffix .sh?
+#    - Because it IS written in Bash syntax and should be included as part of the outer Bash script.
+#      Stuffs here are all named with the suffix with their exact syntax. Good for people, good for parser.
+#      Never hide stuffs, abstraction layers added to hide them only make things more complicated.
+# - There's no sanity check?
+#    - Not the purpose of this script, it just sets things up. Those functions using them should do sanity check.
 
 name_distro='ArchLinuxARM-aarch64'
 dir_aur='aur'
