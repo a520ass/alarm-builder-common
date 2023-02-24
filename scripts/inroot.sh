@@ -34,6 +34,7 @@ setup_users() {
       useradd -g ${userinfo[1]} -m ${userinfo[0]}
     fi
     if [[ "${userinfo[2]}" ]]; then
+      echo "   -> Password: ${userinfo[2]}"
       printf '%s\n%s\n' "${userinfo[2]}" "${userinfo[2]}" | passwd "${userinfo[0]}"
     else
       echo "   -> Warning: no password is set, you will not be able to login as this user"
