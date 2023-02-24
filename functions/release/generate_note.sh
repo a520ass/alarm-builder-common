@@ -7,7 +7,7 @@ generate_note() {
     pkg_name="$(cut -d : -f 1 <<< $release_note_package)"
     pkg_source="${release_note_package: $((${#pkg_name} + 1))}"
     pkg_version="$(grep $'^'"${pkg_name}"' .*' "${file_versions}" | cut -d ' ' -f 2)"
-    echo "${pkg_name}|${pkg_version}|${pkg_source}" >> "${note}"
+    echo "|${pkg_name}|${pkg_version}|${pkg_source}|" >> "${note}"
   done
   rm -f "${file_versions}"
   echo " => Release note generated"
