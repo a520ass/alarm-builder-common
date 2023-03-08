@@ -56,6 +56,7 @@ release_note_packages=(
   'sudo:official'
   'vim:official'
 )
-blob_list=( # Blob files, in the format of [install path]::[install mode]::[source]::[sha256 sum]
-
-)
+blob_paths=()
+blob_modes=()
+blob_urls=()
+blob_sha256sums=()
