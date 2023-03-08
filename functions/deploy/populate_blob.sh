@@ -9,7 +9,7 @@ populate_blob() {
     blob_path_real="${dir_blob}${blob_path}"
     blob_path_target="${dir_root}${blob_path}"
 
-    install -DTvm "${blob_mode}" "${blob_path_real}" "${blob_path_target}"
+    sudo install -DTvm "${blob_mode}" "${blob_path_real}" "${blob_path_target}"
   done
   echo " => Populated project/device-specific blobs"
 }
