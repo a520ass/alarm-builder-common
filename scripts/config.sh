@@ -10,6 +10,7 @@
 name_distro='ArchLinuxARM-aarch64'
 dir_aur='aur'
 dir_pkg='pkg'
+dir_blob='blob'
 dir_releases='releases'
 disk_label='msdos'
 disk_size='2G' # iB omitted, but remember they stand for MiB or GiB (1024 units), not the 1000 units
@@ -54,4 +55,7 @@ release_note_packages=(
   'openssh:official'
   'sudo:official'
   'vim:official'
+)
+blob_list=( # Blob files, in the format of [install path]::[install mode]::[source]::[sha256 sum]
+
 )

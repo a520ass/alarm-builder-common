@@ -6,6 +6,8 @@
 . common/functions/deploy/pacstrap_from_repo.sh
 . common/functions/deploy/pacstrap_aur.sh
 . common/functions/deploy/genfstab_root.sh
+. common/functions/deploy/populate_blob.sh
+. common/functions/deploy/populate_boot.sh
 . common/functions/deploy/get_versions.sh
 
 deploy() {
@@ -19,6 +21,7 @@ deploy() {
   pacstrap_aur
   genfstab_root
   populate_blob
+  populate_boot
   get_versions
   echo "=> Deploy end"
 }
