@@ -8,7 +8,7 @@
 #    - Not the purpose of this script, it just sets things up. Those functions using them should do sanity check.
 
 name_distro='ArchLinuxARM-aarch64'
-dir_aur='aur'
+dir_build='build'
 dir_pkg='pkg'
 dir_blob='blob'
 dir_releases='releases'

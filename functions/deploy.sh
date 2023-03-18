@@ -4,7 +4,7 @@
 . common/functions/deploy/create_mountpoint.sh
 . common/functions/deploy/mount_tree.sh
 . common/functions/deploy/pacstrap_from_repo.sh
-. common/functions/deploy/pacstrap_aur.sh
+. common/functions/deploy/pacstrap_built.sh
 . common/functions/deploy/genfstab_root.sh
 . common/functions/deploy/populate_blob.sh
 . common/functions/deploy/populate_boot.sh
@@ -18,7 +18,7 @@ deploy() {
   create_mountpoint
   mount_tree
   pacstrap_from_repo
-  pacstrap_aur
+  pacstrap_built
   genfstab_root
   populate_blob
   populate_boot

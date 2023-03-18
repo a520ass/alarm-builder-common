@@ -1,11 +1,11 @@
-should_build_aur() { 
+should_build() { 
   # should be called inside the folder
-  # #1 aur name
-  local aur_pkg=$1
+  # #1 pkg name
+  local build_pkg=$1
   (
     . PKGBUILD
-    file_blacklist="../${aur_pkg}.blacklist"
-    file_whitelist="../${aur_pkg}.whitelist"
+    file_blacklist="../${build_pkg}.blacklist"
+    file_whitelist="../${build_pkg}.whitelist"
     if [[ -f "${file_blacklist}" ]]; then
       readarray -t blacklist < "${file_blacklist}"
     else

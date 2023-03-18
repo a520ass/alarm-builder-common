@@ -1,10 +1,10 @@
-. common/functions/prepare/prepare_aur/should_build_aur.sh
-. common/functions/prepare/prepare_aur/move_built_to_pkg.sh
+. common/functions/prepare/prepare_pkg/should_build.sh
+. common/functions/prepare/prepare_pkg/move_built_to_pkg.sh
 
-prepare_aur() {
-  echo " => Preparing AUR packages..."
-  echo "  -> Cleaning AUR build dir..."
-  find "${dir_aur}" -maxdepth 2 -name '*-aarch64.pkg.tar' -exec rm -rf {} \;
+prepare_pkg() {
+  echo " => Preparing packages..."
+  echo "  -> Cleaning build dir..."
+  find "${dir_build}" -maxdepth 2 -name '*-aarch64.pkg.tar' -exec rm -rf {} \;
   echo "  -> Preparing package storage dir..."
   mkdir -p "${dir_pkg}"
   if compgen -G "${dir_pkg}/"* &>/dev/null && ! chmod u+x "${dir_pkg}/"*; then
@@ -18,14 +18,14 @@ prepare_aur() {
   local dir_pkg_absolute=$(readlink -f "${dir_pkg}")
   local PKGEXT=.pkg.tar
   export PKGEXT
-  pushd "${dir_aur}"
-  for aur_pkg in *; do
-    if [[ ! -d "${aur_pkg}" ]]; then
+  pushd "${dir_build}"
+  for build_pkg in *; do
+    if [[ ! -d "${build_pkg}" ]]; then
       continue
     fi
-    pushd "${aur_pkg}"
-    if should_build_aur "${aur_pkg}"; then
-      echo "  -> Building AUR package ${aur_pkg}..."
+    pushd "${build_pkg}"
+    if should_build "${build_pkg}"; then
+      echo "  -> Building package ${build_pkg}..."
       local retry=3
       local success=''
       while [[ ${retry} -ge 0 ]]; do
@@ -34,13 +34,13 @@ prepare_aur() {
           success='yes'
           break
         fi
-        echo "  -> Retrying to build AUR package ${aur_pkg}, retries left: ${retry}"
+        echo "  -> Retrying to build package ${build_pkg}, retries left: ${retry}"
       done
       if [[ -z "${success}" ]]; then
-        echo "  -> Failed to build AUR package ${aur_pkg} after 3 retries"
+        echo "  -> Failed to build package ${build_pkg} after 3 retries"
         exit 1
       fi
-      move_built_to_pkg "${aur_pkg}" "${dir_pkg_absolute}"
+      move_built_to_pkg "${build_pkg}" "${dir_pkg_absolute}"
     fi
     popd
   done
@@ -51,5 +51,5 @@ prepare_aur() {
       rm -f "${i}"
     fi
   done
-  echo " => AUR packages prepared"
+  echo " => Packages built"
 }
