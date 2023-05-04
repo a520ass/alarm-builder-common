@@ -29,7 +29,7 @@ prepare_pkg() {
       local retry=3
       local success=''
       while [[ ${retry} -ge 0 ]]; do
-        makepkg -cfsAC
+        makepkg -cfsAC --noconfirm
         if [[ $? == 0 ]]; then
           success='yes'
           break

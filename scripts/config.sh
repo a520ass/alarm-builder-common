@@ -11,6 +11,7 @@ name_distro='ArchLinuxARM-aarch64'
 dir_build='build'
 dir_pkg='pkg'
 dir_blob='blob'
+dir_cross='cross'
 dir_releases='releases'
 disk_label='msdos'
 disk_size='2G' # iB omitted, but remember they stand for MiB or GiB (1024 units), not the 1000 units
@@ -60,3 +61,7 @@ blob_paths=()
 blob_modes=()
 blob_urls=()
 blob_sha256sums=()
+
+# Cross-build only configs
+bootstrap_x86_64=https://geo.mirror.pkgbuild.com/iso/latest/archlinux-bootstrap-x86_64.tar.gz
+bootstrap_aarch64=http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz
