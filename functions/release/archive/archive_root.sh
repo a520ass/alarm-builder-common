@@ -4,7 +4,7 @@ archive_root() {
   echo " -> Creating archive ${path_archive} without compression..."
   (
     cd "${dir_root}"
-    sudo bsdtar --acls --xattrs -cvpf - *
+    sudo bsdtar --acls --xattrs -cpf - *
   ) > "${path_archive}"
   if [[ "${compressor}" == 'no' ]]; then
     echo " -> Compressing skipped since compressor=no"

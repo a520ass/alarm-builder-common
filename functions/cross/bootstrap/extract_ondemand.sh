@@ -23,7 +23,7 @@ extract_ondemand() { # $1: arch name, $2: strip level
     else
       local stripping=''
     fi
-    sudo bsdtar -C "${cross_root}" -xvpzf ${cross_root_archive} --acls --xattrs ${stripping}
+    sudo bsdtar -C "${cross_root}" -xpzf ${cross_root_archive} --acls --xattrs ${stripping}
     echo "  -> Extracted ArchLinux $1 rootfs"
   fi
 }

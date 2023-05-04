@@ -4,7 +4,7 @@ archive_pkgs() {
   echo " -> Creating archive ${path_archive} without compression..."
   (
     cd "${dir_pkg}"
-    tar -cvf - *
+    tar -cf - *
   ) > "${path_archive}"
   if [[ "${compressor}" == 'no' ]]; then
     echo " -> Compressing skipped since compressor=no"
