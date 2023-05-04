@@ -2,6 +2,6 @@
 
 bootstrap() {
   echo " => Bootstrapping cross build environment..."
-  mkdir -p "${cross_root}"
+  sudo mkdir -p "${cross_root}"
   bootstrap_aarch64
 }
