@@ -14,7 +14,7 @@ extract_ondemand() { # $1: arch name, $2: strip level
       local bootstrap_name="bootstrap_$1"
       local url="${!bootstrap_name}"
       echo "  -> Downloading $1 rootfs from $url..."
-      wget "${url}" -O "${cross_root_archive}"
+      wget "${url}" -O "${cross_root_archive}" --quiet
     fi
     echo "  -> Extracting $1 rootfs from ${cross_root_archive}..."
     sudo mkdir -p "${cross_root}" # This is not atomic, if the script fails here we're screwed since the next time this is run the bootstrap will be considered finished
