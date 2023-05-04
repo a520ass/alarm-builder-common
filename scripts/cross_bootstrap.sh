@@ -1,4 +1,3 @@
-#!/bin/bash -e
 pacman -Rcns linux-aarch64 vi --noconfirm
 pacman-key --init
 pacman-key --populate
