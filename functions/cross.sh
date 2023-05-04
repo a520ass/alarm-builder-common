@@ -1,6 +1,7 @@
 . common/functions/cross/bootstrap.sh
 
 cross() {
+  mkdir -p ${dir_cross}
   cross_root="${dir_cross}/aarch64"
   bootstrap
   local in_project='/home/alarm/alarm-builder'

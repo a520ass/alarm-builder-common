@@ -1,7 +1,6 @@
 extract_ondemand() { # $1: arch name, $2: strip level
-  local cross_root="cross/$1"
   if [[ -d "${cross_root}" ]]; then
-    local random_mark="${cross_root}/.$(uuidgen)"
+    local random_mark="${cross_root}/.${RANDOM}"
     if touch "${random_mark}"; then
       rm -f "${random_mark}"
       echo "  -> Cross rootfs for $1 exists (${cross_root}) and we as normal user has write permission, this is not good, refuse to continue"
