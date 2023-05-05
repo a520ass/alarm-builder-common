@@ -19,6 +19,7 @@ cross() {
     esac
   done
   sudo cp -rva "${copy_list[@]}" "${cross_project}/"
+  strat_distccd_and_trap
   sudo mount -o bind "${cross_root}" "${cross_root}"
   sudo arch-chroot "${cross_root}" "${in_project}/common/scripts/cross_entrypoint.sh"
   sudo umount -R "${cross_root}"
