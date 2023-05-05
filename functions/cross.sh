@@ -2,9 +2,9 @@ relative_source cross/bootstrap.sh
 
 cross() {
   mkdir -p "${dir_cross}"
-  cross_root="${dir_cross}/aarch64"
   bootstrap
   local in_project='/home/alarm/alarm-builder'
+  local cross_root="${dir_cross}/aarch64"
   local cross_project="${cross_root}${in_project}"
   sudo mkdir -p "${cross_project}"
   # !(${dir_cross}) does not work even with shopt -s extglob, have to do it this way

@@ -63,5 +63,6 @@ blob_urls=()
 blob_sha256sums=()
 
 # Cross-build only configs
-bootstrap_x86_64=https://geo.mirror.pkgbuild.com/iso/latest/archlinux-bootstrap-x86_64.tar.gz
-bootstrap_aarch64=http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz
+bootstrap_url_x86_64=https://geo.mirror.pkgbuild.com/iso/latest/archlinux-bootstrap-x86_64.tar.gz
+bootstrap_url_aarch64=http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz
+bootstrap_url_xtools_aarch64_on_x86_64=https://archlinuxarm.org/builder/xtools/x-tools8.tar.xz

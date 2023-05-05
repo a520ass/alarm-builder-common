@@ -1,8 +1,9 @@
 relative_source extract_ondemand.sh
 
 bootstrap_aarch64() {
+  local cross_root="${dir_cross}/aarch64"
   local bootstrapped_mark="${cross_root}/.finished_bootstrap"
-  extract_ondemand aarch64
+  extract_ondemand aarch64 yes ''
   if [[ ! -f "${bootstrapped_mark}" ]]; then
     local script_out_path=$(mktemp)
     echo '#!/bin/bash' > "${script_out_path}"
