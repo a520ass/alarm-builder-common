@@ -7,7 +7,10 @@ cross() {
   local in_project='/home/alarm/alarm-builder'
   local cross_project="${cross_root}${in_project}"
   sudo mkdir -p "${cross_project}"
-  sudo cp -rva !(${dir_cross}) "${cross_project}/"
+  {
+    shopt -s extglob
+    sudo cp -rva !(${dir_cross}) "${cross_project}/"
+  }
   sudo mount -o bind "${cross_root}" "${cross_root}"
   sudo arch-chroot "${cross_root}" "${in_project}/common/scripts/cross_entrypoint.sh"
   sudo umount -R "${cross_root}"
