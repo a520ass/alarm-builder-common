@@ -1,5 +1,5 @@
-. common/functions/cleanup/clean_pacman.sh
-. common/functions/cleanup/remove_non_fallback.sh
+relative_source cleanup/clean_pacman.sh
+relative_source cleanup/remove_non_fallback.sh
 
 cleanup() {
   echo "=> Cleaning up..."  

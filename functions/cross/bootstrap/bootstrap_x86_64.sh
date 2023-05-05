@@ -1,4 +1,4 @@
-. common/functions/cross/bootstrap/bootstrap_ondemand.sh
+relative_source bootstrap_ondemand.sh
 
 bootstrap_x86_64() {
   local first_bootstrap=''

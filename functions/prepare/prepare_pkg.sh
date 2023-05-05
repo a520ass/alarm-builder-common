@@ -1,5 +1,5 @@
-. common/functions/prepare/prepare_pkg/should_build.sh
-. common/functions/prepare/prepare_pkg/move_built_to_pkg.sh
+relative_source prepare_pkg/should_build.sh
+relative_source prepare_pkg/move_built_to_pkg.sh
 
 prepare_pkg() {
   echo " => Preparing packages..."

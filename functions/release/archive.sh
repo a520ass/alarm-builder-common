@@ -1,5 +1,5 @@
-. common/functions/release/archive/archive_pkgs.sh
-. common/functions/release/archive/archive_root.sh
+relative_source archive/archive_pkgs.sh
+relative_source archive/archive_root.sh
 
 archive() {
   archive_pkgs

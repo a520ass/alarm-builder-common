@@ -13,3 +13,4 @@ pacman -Syu --noconfirm \
   wget \
   sudo
 echo 'alarm ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/alarm_allow_sudo_no_passwd
+echo 'MAKEFLAGS="-j3"' >> cross/aarch64/etc/makepkg.conf

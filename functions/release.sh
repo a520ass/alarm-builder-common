@@ -1,8 +1,8 @@
-. common/functions/release/archive.sh
-. common/functions/release/zero_fill.sh
-. common/functions/release/release_resource.sh
-. common/functions/release/compress_image.sh
-. common/functions/release/generate_note.sh
+relative_source release/archive.sh
+relative_source release/zero_fill.sh
+relative_source release/release_resource.sh
+relative_source release/compress_image.sh
+relative_source release/generate_note.sh
 
 release() {
   archive

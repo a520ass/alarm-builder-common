@@ -1,14 +1,14 @@
-. common/functions/deploy/create_disk.sh
-. common/functions/deploy/setup_loop.sh
-. common/functions/deploy/create_fs.sh
-. common/functions/deploy/create_mountpoint.sh
-. common/functions/deploy/mount_tree.sh
-. common/functions/deploy/pacstrap_from_repo.sh
-. common/functions/deploy/pacstrap_built.sh
-. common/functions/deploy/genfstab_root.sh
-. common/functions/deploy/populate_blob.sh
-. common/functions/deploy/populate_boot.sh
-. common/functions/deploy/get_versions.sh
+relative_source deploy/create_disk.sh
+relative_source deploy/setup_loop.sh
+relative_source deploy/create_fs.sh
+relative_source deploy/create_mountpoint.sh
+relative_source deploy/mount_tree.sh
+relative_source deploy/pacstrap_from_repo.sh
+relative_source deploy/pacstrap_built.sh
+relative_source deploy/genfstab_root.sh
+relative_source deploy/populate_blob.sh
+relative_source deploy/populate_boot.sh
+relative_source deploy/get_versions.sh
 
 deploy() {
   echo "=> Deploying..."

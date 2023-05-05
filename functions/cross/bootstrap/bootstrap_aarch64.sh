@@ -1,4 +1,4 @@
-. common/functions/cross/bootstrap/extract_ondemand.sh
+relative_source extract_ondemand.sh
 
 bootstrap_aarch64() {
   local bootstrapped_mark="${cross_root}/.finished_bootstrap"

@@ -1,7 +1,7 @@
-. common/functions/prepare/prepare_blob.sh
-. common/functions/prepare/prepare_pkg.sh
-. common/functions/prepare/prepare_name.sh
-. common/functions/prepare/prepare_uuid.sh
+relative_source prepare/prepare_blob.sh
+relative_source prepare/prepare_pkg.sh
+relative_source prepare/prepare_name.sh
+relative_source prepare/prepare_uuid.sh
 
 prepare() {
   echo "=> Preparing..."

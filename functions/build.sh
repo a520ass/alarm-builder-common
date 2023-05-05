@@ -1,9 +1,9 @@
-. common/functions/sanity_check.sh
-. common/functions/prepare.sh
-. common/functions/deploy.sh
-. common/functions/setup.sh
-. common/functions/cleanup.sh
-. common/functions/release.sh
+relative_source sanity_check.sh
+relative_source prepare.sh
+relative_source deploy.sh
+relative_source setup.sh
+relative_source cleanup.sh
+relative_source release.sh
 
 build() {
   echo "=> Build starts at $(date) <="

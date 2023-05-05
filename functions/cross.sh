@@ -1,4 +1,4 @@
-. common/functions/cross/bootstrap.sh
+relative_source cross/bootstrap.sh
 
 cross() {
   mkdir -p "${dir_cross}"
