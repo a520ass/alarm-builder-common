@@ -8,11 +8,10 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
   local bootstrap_url="${!bootstrap_url_varname}"
   local bootstrap_url_name="$(basename "${bootstrap_url}")"
   local bootstrap_url_suffix="${bootstrap_url_name%%.*}"
+  local extract_url_mark="${extract_dir}.url"
   local bootstrap_url_old="$(<${extract_url_mark})"
   local bootstrap_url_outdated=''
   local extract_file="${extract_dir}.${bootstrap_url_suffix}"
-  local extract_url_mark="${extract_dir}.url"
-  local bootstrap_reason=''
   if [[ "${bootstrap_url_old}" != "${bootstrap_url}" ]]; then
     bootstrap_url_outdated='yes'
     echo "  -> URL for ${extract_dir} updated, old: ${bootstrap_url_old}, new: ${bootstrap_url}"
