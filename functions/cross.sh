@@ -1,4 +1,5 @@
 relative_source cross/bootstrap.sh
+relative_source cross/start_distccd_and_trap.sh
 
 cross() {
   mkdir -p "${dir_cross}"
@@ -19,7 +20,7 @@ cross() {
     esac
   done
   sudo cp -rva "${copy_list[@]}" "${cross_project}/"
-  strat_distccd_and_trap
+  start_distccd_and_trap
   sudo mount -o bind "${cross_root}" "${cross_root}"
   sudo arch-chroot "${cross_root}" "${in_project}/common/scripts/cross_entrypoint.sh"
   sudo umount -R "${cross_root}"
