@@ -6,8 +6,8 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
   echo "  -> Extracting ${extract_dir} on demand..."
   local bootstrap_url_varname="bootstrap_url_${extract_name}"
   local bootstrap_url="${!bootstrap_url_varname}"
-  local bootstrap_url_name="$(basename "${bootstrap_url}")"
-  local bootstrap_url_suffix="${bootstrap_url_name%%.*}"
+  local bootstrap_url_name="${bootstrap_url##*/}"
+  local bootstrap_url_suffix="${bootstrap_url_name#*.}"
   local extract_url_mark="${extract_dir}.url"
   local bootstrap_url_old="$(<${extract_url_mark})"
   local bootstrap_url_outdated=''
