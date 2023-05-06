@@ -8,7 +8,7 @@ download_source() {
       pushd "${build_pkg}" > /dev/null
       if should_build "${build_pkg}"; then
         echo "  -> Downloading source for ${build_pkg} before build.."
-        makepkg --ignorearch --nodeps --nobuild --noextract
+        makepkg --ignorearch --nodeps --nobuild
       fi
       popd > /dev/null
     fi
