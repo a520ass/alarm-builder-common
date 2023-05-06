@@ -32,7 +32,7 @@ prepare_pkg() {
       if [[ -d "${dir_build_cross_pkg}" ]]; then
         cross_guest_pkg='yes'
         echo "  -> Cross build replacement for ${build_pkg} found, use ${dir_build_cross_pkg} instead"
-        pushd "${dir_build_cross_pkg}"
+        pushd "${dir_build_cross_pkg}" > /dev/null
       else
         cross_guest_pkg=''
       fi
