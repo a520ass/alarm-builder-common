@@ -3,9 +3,9 @@ relative_source ../prepare/prepare_pkg/should_build.sh
 build_host() {
   if [[ -d "${dir_build_cross}" ]]; then
     echo " => Building host part for cross build packages"
+    local dir_build="$(readlink -f ${dir_build})"
     pushd "${dir_build_cross}" > /dev/null
     local build_pkg=
-    local dir_build="$(readlink -f ${dir_build})"
     local threads=$(($(nproc) + 1))
     for build_pkg in *; do
       if [[ -d "${build_pkg}" ]]; then
