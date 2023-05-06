@@ -5,4 +5,5 @@ bootstrap() {
   echo " => Bootstrapping cross build environment..."
   bootstrap_aarch64
   bootstrap_xtools_aarch64_on_x86_64
+  bootstrap_x86_64
 }
