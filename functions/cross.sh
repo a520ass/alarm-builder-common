@@ -28,8 +28,8 @@ cross() {
   sudo mount -o bind "${cross_root}" "${cross_root}"
   sudo -E arch-chroot "${cross_root}" "${in_project}/common/scripts/cross_entrypoint.sh"
   sudo umount -R "${cross_root}"
-  rm -rf "${dir_blob}" "${dir_build}" "${dir_pkg}" "${dir_releases}"
-  sudo mv "${cross_project}/"{"${dir_blob}","${dir_build}","${dir_pkg}","${dir_releases}"} "${dir_releases}/"
-  sudo chown -R $(id --user):$(id --group) "${dir_blob}" "${dir_build}" "${dir_pkg}" "${dir_releases}"
+  rm -rf "${dir_blob}" "${dir_build}" "${dir_build_cross}" "${dir_pkg}" "${dir_releases}"
+  sudo mv "${cross_project}/"{"${dir_blob}","${dir_build}","${dir_build_cross}","${dir_pkg}","${dir_releases}"} "${dir_releases}/"
+  sudo chown -R $(id --user):$(id --group) "${dir_blob}" "${dir_build}" "${dir_build_cross}" "${dir_pkg}" "${dir_releases}"
   sudo rm -rf "${cross_project}"
 }
