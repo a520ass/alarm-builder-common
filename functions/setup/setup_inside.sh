@@ -15,7 +15,7 @@ setup_inside() {
   local script_in_path="/root/inroot.sh"
   local script_actual_path="${dir_root}${script_in_path}"
   sudo install -Dm755 "${script_out_path}" "${script_actual_path}"
-  sudo -E arch-chroot "${dir_root}" "${script_in_path}"
+  sudo arch-chroot "${dir_root}" "${script_in_path}"
   sudo rm -f "${script_actual_path}" "${script_out_path}"
   echo "=> Getting out from the target root"
 }

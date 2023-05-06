@@ -26,7 +26,7 @@ cross() {
   sudo cp -rva "${copy_list[@]}" "${cross_project}/"
   start_distccd_and_trap
   sudo mount -o bind "${cross_root}" "${cross_root}"
-  sudo -E arch-chroot "${cross_root}" "${in_project}/common/scripts/cross_entrypoint.sh"
+  sudo --preserve-env=compressor,GOPROXY,http_proxy,https_proxy arch-chroot "${cross_root}" "${in_project}/common/scripts/cross_entrypoint.sh"
   sudo umount -R "${cross_root}"
   rm -rf "${dir_blob}" "${dir_build}" "${dir_build_cross}" "${dir_pkg}" "${dir_releases}"
   sudo mv "${cross_project}/"{"${dir_blob}","${dir_build}","${dir_build_cross}","${dir_pkg}","${dir_releases}"} "${dir_releases}/"
