@@ -4,6 +4,7 @@ build_host() {
   if [[ -d "${dir_build_cross}" ]]; then
     echo " => Building host part for cross build packages"
     local dir_build_absolute="$(readlink -f ${dir_build})"
+    local cross_path="$(readlink -f ${dir_cross}/xtools_aarch64_on_x86_64)/aarch64-unknown-linux-gnu/bin:${PATH}"
     pushd "${dir_build_cross}" > /dev/null
     local build_pkg=
     local threads=$(($(nproc) + 1))
@@ -24,7 +25,7 @@ build_host() {
             (
               export ARCH=arm64
               export CROSS_COMPILE=aarch64-linux-gnu-
-              export PATH="$(readlink -f ${dir_cross}/xtools_aarch64_on_x86_64)/aarch64-unknown-linux-gnu/bin:${PATH}"
+              export PATH="${cross_path}"
               export MAKEFLAGS="${MAKEFLAGS} ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} -j${threads}"
               . build.sh
             )
