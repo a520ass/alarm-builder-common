@@ -7,12 +7,12 @@ download_source() {
     if [[ -d "${build_pkg}" ]]; then
       pushd "${build_pkg}" > /dev/null
       if should_build "${build_pkg}"; then
-        echo " => Downloading source for ${build_pkg} before cross build.."
-        makepkg --ignorearch --nodeps --nobuild
+        echo "  -> Downloading source for ${build_pkg} before build.."
+        makepkg --ignorearch --nodeps --nobuild --noextract
       fi
       popd > /dev/null
     fi
   done
   popd > /dev/null
-  echo " => Downloaded all sources before cross build"
+  echo " => Downloaded all sources before build"
 }
