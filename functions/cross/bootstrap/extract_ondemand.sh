@@ -40,7 +40,7 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
   fi
   if [[ "${read_only}" ]]; then
     local random_mark="${extract_dir}/.${RANDOM}"
-    if touch "${random_mark}"; then
+    if touch "${random_mark}" 2>/dev/null; then
       rm -f "${random_mark}"
       echo "  -> Extraction target folder ${extract_dir} exists but we as normal user has write permission, when it is not allowed"
       return 1
