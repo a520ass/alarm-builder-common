@@ -12,7 +12,7 @@ bootstrap_x86_64() {
     local script_actual_path="${cross_root}${script_in_path}"
     sudo install -Dm755 "${script_out_path}" "${script_actual_path}"
     sudo mount -o bind "${cross_root}" "${cross_root}"
-    sudo arch-chroot "${cross_root}" "${script_in_path}"
+    sudo -E arch-chroot "${cross_root}" "${script_in_path}"
     sudo umount "${cross_root}"
     sudo rm -f "${script_actual_path}" "${script_out_path}"
     sudo touch "${bootstrapped_mark}"
