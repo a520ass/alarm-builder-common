@@ -7,12 +7,19 @@ build_host() {
     pushd "${dir_build_cross}" > /dev/null
     local build_pkg=
     local threads=$(($(nproc) + 1))
+    local should_build_pkg=
     for build_pkg in *; do
       if [[ -d "${build_pkg}" ]]; then
         dir_build_pkg="${dir_build}/${build_pkg}"
         if [[ -d "${dir_build_pkg}" ]]; then
           pushd "${dir_build_pkg}" > /dev/null
           if should_build "${build_pkg}"; then
+            should_build_pkg='yes'
+          else
+            should_build_pkg=''
+          fi
+          popd > /dev/null
+          if [[ "${should_build_pkg}" ]]; then
             pushd "${build_pkg}" > /dev/null
             (
               export ARCH=arm64
@@ -23,7 +30,6 @@ build_host() {
             )
             popd > /dev/null
           fi
-          popd > /dev/null
         else
           echo "  -> Ignored cross package ${build_pkg} since we did no find its generic counterpart under ${dir_build}"
         fi
