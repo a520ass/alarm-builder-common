@@ -18,12 +18,12 @@ prepare_pkg() {
   local dir_pkg_absolute=$(readlink -f "${dir_pkg}")
   local PKGEXT=.pkg.tar
   export PKGEXT
-  pushd "${dir_build}"
+  pushd "${dir_build}" > /dev/null
   for build_pkg in *; do
     if [[ ! -d "${build_pkg}" ]]; then
       continue
     fi
-    pushd "${build_pkg}"
+    pushd "${build_pkg}" > /dev/null
     if should_build "${build_pkg}"; then
       echo "  -> Building package ${build_pkg}..."
       local retry=3
@@ -42,9 +42,9 @@ prepare_pkg() {
       fi
       move_built_to_pkg "${build_pkg}" "${dir_pkg_absolute}"
     fi
-    popd
+    popd > /dev/null
   done
-  popd
+  popd > /dev/null
   local i
   for i in "${dir_pkg}/"*; do
     if [[ -x "${i}" ]]; then
