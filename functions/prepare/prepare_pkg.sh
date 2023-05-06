@@ -18,6 +18,7 @@ prepare_pkg() {
   local dir_pkg_absolute=$(readlink -f "${dir_pkg}")
   local PKGEXT=.pkg.tar
   local cross_guest_pkg=
+  local dir_build_cross_absolute="$(readlink -f "${dir_build_cross}")"
   export PKGEXT
   pushd "${dir_build}" > /dev/null
   for build_pkg in *; do
@@ -27,7 +28,7 @@ prepare_pkg() {
     pushd "${build_pkg}" > /dev/null
     if should_build "${build_pkg}"; then
       echo "  -> Building package ${build_pkg}..."
-      local dir_build_cross_pkg="${dir_build_cross}/${build_pkg}"
+      local dir_build_cross_pkg="${dir_build_cross_absolute}/${build_pkg}"
       if [[ -d "${dir_build_cross_pkg}" ]]; then
         cross_guest_pkg='yes'
         echo "  -> Cross build replacement for ${build_pkg} found, use ${dir_build_cross_pkg} instead"
