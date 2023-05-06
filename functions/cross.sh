@@ -5,6 +5,7 @@ relative_source cross/start_distccd_and_trap.sh
 cross() {
   mkdir -p "${dir_cross}"
   bootstrap
+  cross_download_source
   local in_project='/home/alarm/alarm-builder'
   local cross_root="${dir_cross}/aarch64"
   local cross_project="${cross_root}${in_project}"
