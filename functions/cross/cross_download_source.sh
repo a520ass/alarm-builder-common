@@ -6,7 +6,6 @@ cross_download_source() {
   PATH="${arch_root}/usr/bin:${PATH}" \
   LIBRARY="${arch_root}/usr/share/makepkg" \
   MAKEPKG_CONF="${arch_root}/etc/makepkg.conf" \
-  LD_LIBRARY_PATH="${arch_root}/usr/lib" \
     download_source
   prepare_blob
   # local cross_root="${dir_cross}/x86_64"
