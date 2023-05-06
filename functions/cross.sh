@@ -1,11 +1,13 @@
 relative_source cross/bootstrap.sh
 relative_source prepare/prepare_pkg/download_source.sh
+relative_source prepare/prepare_blob.sh
 relative_source cross/start_distccd_and_trap.sh
 
 cross() {
   mkdir -p "${dir_cross}"
   bootstrap
   download_source
+  prepare_blob
   local in_project='/home/alarm/alarm-builder'
   local cross_root="${dir_cross}/aarch64"
   local cross_project="${cross_root}${in_project}"
