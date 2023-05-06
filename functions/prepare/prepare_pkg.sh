@@ -48,7 +48,7 @@ prepare_pkg() {
       done
       if [[ "${cross_guest_pkg}" ]]; then
         popd > /dev/null
-        mv "${dir_build_cross_pkg}"*'.pkg.tar' .
+        mv "${dir_build_cross_pkg}/"*'.pkg.tar' .
       fi
       if [[ -z "${success}" ]]; then
         echo "  -> Failed to build package ${build_pkg} after 3 retries"
