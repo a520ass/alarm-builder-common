@@ -29,8 +29,7 @@ cross() {
   sudo --preserve-env=compressor,GOPROXY,http_proxy,https_proxy arch-chroot "${cross_root}" "${in_project}/common/scripts/cross_entrypoint.sh"
   sudo umount -R "${cross_root}"
   rm -rf "${dir_blob}" "${dir_build}" "${dir_build_cross}" "${dir_pkg}" "${dir_releases}"
-  mkdir -p "${dir_releases}"
-  sudo mv "${cross_project}/"{"${dir_blob}","${dir_build}","${dir_build_cross}","${dir_pkg}","${dir_releases}"} "${dir_releases}/"
+  sudo mv "${cross_project}/"{"${dir_blob}","${dir_build}","${dir_build_cross}","${dir_pkg}","${dir_releases}"} .
   sudo chown -R $(id --user):$(id --group) "${dir_blob}" "${dir_build}" "${dir_build_cross}" "${dir_pkg}" "${dir_releases}"
   sudo rm -rf "${cross_project}"
 }
