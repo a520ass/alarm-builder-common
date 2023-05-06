@@ -9,6 +9,7 @@
 
 name_distro='ArchLinuxARM-aarch64'
 dir_build='build'
+dir_build_cross='build_cross'
 dir_pkg='pkg'
 dir_blob='blob'
 dir_cross='cross'

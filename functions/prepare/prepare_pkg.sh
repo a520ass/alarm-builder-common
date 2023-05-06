@@ -17,6 +17,7 @@ prepare_pkg() {
   fi
   local dir_pkg_absolute=$(readlink -f "${dir_pkg}")
   local PKGEXT=.pkg.tar
+  local cross_guest_pkg=
   export PKGEXT
   pushd "${dir_build}" > /dev/null
   for build_pkg in *; do
@@ -26,6 +27,14 @@ prepare_pkg() {
     pushd "${build_pkg}" > /dev/null
     if should_build "${build_pkg}"; then
       echo "  -> Building package ${build_pkg}..."
+      local dir_build_cross_pkg="${dir_build_cross}/${build_pkg}"
+      if [[ -d "${dir_build_cross_pkg}" ]]; then
+        cross_guest_pkg='yes'
+        echo "  -> Cross build replacement for ${build_pkg} found, use ${dir_build_cross_pkg} instead"
+        pushd "${dir_build_cross_pkg}"
+      else
+        cross_guest_pkg=''
+      fi
       local retry=3
       local success=''
       while [[ ${retry} -ge 0 ]]; do
@@ -36,6 +45,10 @@ prepare_pkg() {
         fi
         echo "  -> Retrying to build package ${build_pkg}, retries left: ${retry}"
       done
+      if [[ "${cross_guest_pkg}" ]]; then
+        popd > /dev/null
+        mv "${dir_build_cross_pkg}"*'.pkg.tar' .
+      fi
       if [[ -z "${success}" ]]; then
         echo "  -> Failed to build package ${build_pkg} after 3 retries"
         exit 1
