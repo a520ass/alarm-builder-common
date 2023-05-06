@@ -9,6 +9,7 @@ cross() {
   local arch_root="$(readlink -f ${dir_cross}/x86_64)"
   PATH="${arch_root}/usr/bin:${PATH}" \
   LIBRARY="${arch_root}/usr/share/makepkg" \
+  MAKEPKG_CONF="${arch_root}/etc/makepkg.conf" \
     download_source
   prepare_blob
   local in_project='/home/alarm/alarm-builder'
