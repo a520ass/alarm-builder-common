@@ -6,7 +6,8 @@ relative_source cross/start_distccd_and_trap.sh
 cross() {
   mkdir -p "${dir_cross}"
   bootstrap
-  download_source
+  PATH="$(readlink -f ${dir_cross}/x86_64)/usr/bin:${PATH}" \
+    download_source
   prepare_blob
   local in_project='/home/alarm/alarm-builder'
   local cross_root="${dir_cross}/aarch64"
