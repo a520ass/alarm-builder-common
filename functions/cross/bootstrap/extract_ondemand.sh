@@ -18,7 +18,7 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
     echo "  -> Extracting to ${extract_dir} as it does not exist or url outdated, old: ${bootstrap_url_old}, new: ${bootstrap_url}"
     sudo rm -rf "${extract_dir}"
     if [[ ! -f "${extract_file}" || "${bootstrap_url_old_archive}" != "${bootstrap_url}" ]] ; then
-      echo "  -> Downloading ${extract_file} rom ${bootstrap_url}..."
+      echo "  -> Downloading ${extract_file} from ${bootstrap_url}..."
       wget "${bootstrap_url}" -O "${extract_file}"
       echo "${bootstrap_url}" > "${extract_url_mark}"
     fi
