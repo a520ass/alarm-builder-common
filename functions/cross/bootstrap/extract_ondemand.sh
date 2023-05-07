@@ -20,7 +20,7 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
     if [[ ! -f "${extract_file}" || "${bootstrap_url_old_archive}" != "${bootstrap_url}" ]] ; then
       echo "  -> Downloading ${extract_file} from ${bootstrap_url}..."
       wget "${bootstrap_url}" -O "${extract_file}"
-      echo "${bootstrap_url}" > "${extract_url_mark}"
+      echo "${bootstrap_url}" > "${extract_url_mark_archive}"
     fi
     if [[ "${strip_level}" ]]; then
       local stripping="--strip-components ${strip_level}"
@@ -34,6 +34,7 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
       mkdir -p "${extract_dir}"
       tar -C "${extract_dir}" ${stripping} -xf "${extract_file}"
     fi
+    echo "${bootstrap_url}" | sudo tee "${extract_url_mark_folder}" > /dev/null
     echo "  -> Extracted ${extract_file} into ${extract_dir}"
   else
     echo "  -> No need to extract to ${extract_dir}"
