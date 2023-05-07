@@ -18,6 +18,7 @@ cross() {
   for copy_target in *; do
     case "${copy_target}" in 
       "${dir_cross}") : ;;
+      "${dir_releases}") : ;;
       *)
         copy_list+=("${copy_target}")
       ;;
@@ -28,8 +29,14 @@ cross() {
   sudo mount -o bind "${cross_root}" "${cross_root}"
   sudo --preserve-env=compressor,GOPROXY,http_proxy,https_proxy arch-chroot "${cross_root}" "${in_project}/common/scripts/cross_entrypoint.sh"
   sudo umount -R "${cross_root}"
-  rm -rf "${dir_blob}" "${dir_build}" "${dir_build_cross}" "${dir_pkg}" "${dir_releases}"
-  sudo mv "${cross_project}/"{"${dir_blob}","${dir_build}","${dir_build_cross}","${dir_pkg}","${dir_releases}"} .
-  sudo chown -R $(id --user):$(id --group) "${dir_blob}" "${dir_build}" "${dir_build_cross}" "${dir_pkg}" "${dir_releases}"
+  local copy_back_list=(
+    "${dir_blob}"
+    "${dir_build}"
+    "${dir_build_cross}"
+    "${dir_pkg}"
+    "${dir_releases}"
+  )
+  sudo tar -C "${cross_project}" -c "${copy_back_list[@]}" | tar -x # One command to be atomic
+  sudo chown -R $(id --user):$(id --group)  "${copy_back_list[@]}"
   sudo rm -rf "${cross_project}"
 }
