@@ -3,7 +3,6 @@ relative_source ../prepare/prepare_blob.sh
 
 cross_download_source() {
   local arch_root="$(readlink -f ${dir_cross}/x86_64)"
-  PATH="${arch_root}/usr/bin:${PATH}" \
   LIBRARY="${arch_root}/usr/share/makepkg" \
   MAKEPKG_CONF="${arch_root}/etc/makepkg.conf" \
     download_source
