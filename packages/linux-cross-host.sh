@@ -19,7 +19,7 @@ unpack() {
   tar -C "${builddir}" -xf source.tar.gz --strip-components=1
 }
 
-patch() {
+patching() {
   local patch_file
   local patch_files=()
   for patch_file in *.patch; do
@@ -159,6 +159,7 @@ package() {
 all() {
   if should_build; then
     unpack
+    patching
     prepare
     build
     package
