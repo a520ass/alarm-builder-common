@@ -1,8 +1,8 @@
 relative_source ../prepare/prepare_pkg/should_build.sh
 
 build_host() {
+  echo " => Building host part for cross build packages"
   if [[ -d "${dir_build_cross}" ]]; then
-    echo " => Building host part for cross build packages"
     local dir_build_absolute="$(readlink -f ${dir_build})"
     local cross_prefix=$(readlink -f ${dir_cross}/xtools_aarch64_on_x86_64)/aarch64-unknown-linux-gnu/bin/aarch64-unknown-linux-gnu-
     pushd "${dir_build_cross}" > /dev/null

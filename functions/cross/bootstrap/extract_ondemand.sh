@@ -8,19 +8,17 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
   local bootstrap_url="${!bootstrap_url_varname}"
   local bootstrap_url_name="${bootstrap_url##*/}"
   local bootstrap_url_suffix="${bootstrap_url_name#*.}"
-  local extract_url_mark="${extract_dir}.url"
-  local bootstrap_url_old="$(<${extract_url_mark})"
-  local bootstrap_url_outdated=''
+  local extract_url_mark_archive="${extract_dir}.url"
+  local extract_url_mark_folder="${extract_dir}/.alarm-builder.url"
+  local bootstrap_url_old_archive="$(cat "${extract_url_mark_archive}" 2>/dev/null)"
+  local bootstrap_url_old_folder="$(cat "${extract_url_mark_folder}" 2>/dev/null)"
   local extract_file="${extract_dir}.${bootstrap_url_suffix}"
-  if [[ "${bootstrap_url_old}" != "${bootstrap_url}" ]]; then
-    bootstrap_url_outdated='yes'
-    echo "  -> URL for ${extract_dir} updated, old: ${bootstrap_url_old}, new: ${bootstrap_url}"
-  fi
-  if [[ ! -d "${extract_dir}" || "${bootstrap_url_outdated}" ]]; then
-    echo "  -> Extracting to ${extract_dir} as it does not exist or url outdated"
+  if [[ "${bootstrap_url_old_archive}" != "${bootstrap_url}" || ! "${bootstrap_url_old_folder}" != "${bootstrap_url}" ]]; then
+    # The second check implicitly checks if the folder exists
+    echo "  -> Extracting to ${extract_dir} as it does not exist or url outdated, old: ${bootstrap_url_old}, new: ${bootstrap_url}"
     sudo rm -rf "${extract_dir}"
-    if [[ ! -f "${extract_file}" || "${bootstrap_url_outdated}" ]] ; then
-      echo "  -> Downloading ${extract_file} rootfs from ${bootstrap_url}..."
+    if [[ ! -f "${extract_file}" || "${bootstrap_url_old_archive}" != "${bootstrap_url}" ]] ; then
+      echo "  -> Downloading ${extract_file} rom ${bootstrap_url}..."
       wget "${bootstrap_url}" -O "${extract_file}" --quiet
       echo "${bootstrap_url}" > "${extract_url_mark}"
     fi
@@ -37,8 +35,11 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
       tar -C "${extract_dir}" ${stripping} -xf "${extract_file}"
     fi
     echo "  -> Extracted ${extract_file} into ${extract_dir}"
+  else
+    echo "  -> No need to extract to ${extract_dir}"
   fi
   if [[ "${read_only}" ]]; then
+    echo "  -> Sanity check for extraction target: should be read-only for us, a normal user"
     local random_mark="${extract_dir}/.${RANDOM}"
     if touch "${random_mark}" 2>/dev/null; then
       rm -f "${random_mark}"

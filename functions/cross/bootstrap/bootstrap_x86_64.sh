@@ -1,6 +1,7 @@
 relative_source extract_ondemand.sh
 
 bootstrap_x86_64() {
+  echo "  -> Bootstrapping ArchLinux x86-64 rootfs and toolkit"
   local cross_root="${dir_cross}/x86_64"
   local bootstrapped_mark="${cross_root}/.finished_bootstrap"
   extract_ondemand x86_64 yes 1
@@ -17,4 +18,5 @@ bootstrap_x86_64() {
     sudo rm -f "${script_actual_path}" "${script_out_path}"
     sudo touch "${bootstrapped_mark}"
   fi
+  echo "  -> Boostrapped ArchLinux x86-64 rootfs"
 }

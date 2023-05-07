@@ -4,6 +4,7 @@ relative_source cross/build_host.sh
 relative_source cross/start_distccd_and_trap.sh
 
 cross() {
+  echo "=> Cross build starts at $(date) <="
   mkdir -p "${dir_cross}"
   bootstrap
   cross_download_source
@@ -24,7 +25,8 @@ cross() {
       ;;
     esac
   done
-  sudo cp -rva "${copy_list[@]}" "${cross_project}/"
+  echo "  -> Setting up cross build project folder..."
+  sudo cp -ra "${copy_list[@]}" "${cross_project}/"
   start_distccd_and_trap
   sudo mount -o bind "${cross_root}" "${cross_root}"
   sudo --preserve-env=compressor,GOPROXY,http_proxy,https_proxy arch-chroot "${cross_root}" "${in_project}/common/scripts/cross_entrypoint.sh"
@@ -39,4 +41,5 @@ cross() {
   sudo tar -C "${cross_project}" -c "${copy_back_list[@]}" | tar -x # One command to be atomic
   sudo chown -R $(id --user):$(id --group)  "${copy_back_list[@]}"
   sudo rm -rf "${cross_project}"
+  echo "=> Cross build ends at $(date) <="
 }
