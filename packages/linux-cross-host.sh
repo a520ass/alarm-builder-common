@@ -25,35 +25,35 @@ patching() {
   for patch_file in *.patch; do
     patch_files+=("$(readlink -f "${patch_file}")")
   done
-  pushd "${builddir}"
+  pushd "${builddir}" >/dev/null
   for patch_file in "${patch_files[@]}"; do
     echo "Applying patch ${patch_file}..."
     patch -p1 < "${patch_file}"
   done
-  popd
+  popd >/dev/null
 }
 
 prepare() {
   cp config "${builddir}/.config"
-  pushd "${builddir}"
+  pushd "${builddir}" >/dev/null
   scripts/setlocalversion --save-scmversion
   echo "-${pkgrel}" > localversion.10-pkgrel
   echo "${pkgname#linux}" > localversion.20-pkgname
-  popd
+  popd >/dev/null
 }
 
 build() {
-  pushd "${builddir}"
+  pushd "${builddir}" >/dev/null
   make prepare
   make -s kernelrelease > version
   unset LDFLAGS
   make ${MAKEFLAGS} DTC_FLAGS="-@" Image modules dtbs
-  popd
+  popd >/dev/null
 }
 
 package() {
   local oldpwd="${PWD}"
-  pushd "${builddir}"
+  pushd "${builddir}" >/dev/null
   local root=$(mktemp -d)
   local usr="${root}/usr"
   local dtbs="${root}/boot/dtbs/${pkgname}"
@@ -152,7 +152,7 @@ package() {
   rm -rf "${oldpwd}/"{kernel,dtbs,headers}'.tar.gz'
   mv "${outdir}/"* "${oldpwd}/"
   rm -rf "${outdir}"
-  popd
+  popd >/dev/null
   rm -rf "${builddir}"
 }
 
