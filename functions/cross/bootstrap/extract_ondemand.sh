@@ -13,7 +13,7 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
   local bootstrap_url_old_archive="$(cat "${extract_url_mark_archive}" 2>/dev/null)"
   local bootstrap_url_old_folder="$(cat "${extract_url_mark_folder}" 2>/dev/null)"
   local extract_file="${extract_dir}.${bootstrap_url_suffix}"
-  if [[ "${bootstrap_url_old_archive}" != "${bootstrap_url}" || ! "${bootstrap_url_old_folder}" != "${bootstrap_url}" ]]; then
+  if [[ "${bootstrap_url_old_archive}" != "${bootstrap_url}" || "${bootstrap_url_old_folder}" != "${bootstrap_url}" ]]; then
     # The second check implicitly checks if the folder exists
     echo "  -> Extracting to ${extract_dir} as it does not exist or url outdated, old: ${bootstrap_url_old}, new: ${bootstrap_url}"
     sudo rm -rf "${extract_dir}"
