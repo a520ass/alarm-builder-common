@@ -31,7 +31,7 @@ in_and_out() {
   echo "  -> Moving things back from ArchLinuxARM AArch64 rootfs..."
   local copy_back_folder=
   for copy_back_folder in "${dir_blob}" "${dir_build}" "${dir_build_cross}" "${dir_pkg}" "${dir_releases}"; do
-    if sudo tar -C "${cross_project}" -c "${copy_back_folder}" | tar -x; then
+    if sudo tar -C "${cross_project}" -c "${copy_back_folder}" | tar -x "${copy_back_folder}" ; then
       sudo chown -R $(id --user):$(id --group) "${copy_back_folder}"
     fi
   done
