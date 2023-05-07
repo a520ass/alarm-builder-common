@@ -6,7 +6,7 @@ builddir="${builddir:-builddir}"
 outdir="${outdir:-outdir}"
 
 should_build() {
-  if [[ -f kernel.tar.gz && -f dtbs.tar.gz && -f headers.tar.gz ]]; then
+  if [[ -f kernel.tar && -f dtbs.tar && -f headers.tar ]]; then
     return 1
   else
     return 0
@@ -68,8 +68,8 @@ package() {
     install -Dm644 /dev/stdin "${root}/etc/mkinitcpio.d/${pkgname}.preset"
   rm -rf "${outdir}"
   mkdir "${outdir}"
-  tar -C "${root}" -czf "${outdir}/kernel.tar.gz" 'usr' 'etc'
-  tar -C "${root}" -czf "${outdir}/dtbs.tar.gz" 'boot'
+  tar -C "${root}" -cf "${outdir}/kernel.tar" 'usr' 'etc'
+  tar -C "${root}" -cf "${outdir}/dtbs.tar" 'boot'
   rm -rf "${root}"
   # Headers
   root=$(mktemp -d)
@@ -147,9 +147,9 @@ package() {
   echo "Adding symlink..."
   mkdir -p "${root}/usr/src"
   ln -sr "${build}" "${root}/usr/src/${pkgname}"
-  tar -C "${root}" -czf "${outdir}/headers.tar.gz" usr
+  tar -C "${root}" -cf "${outdir}/headers.tar" usr
   rm -rf "${root}"
-  rm -rf "${oldpwd}/"{kernel,dtbs,headers}'.tar.gz'
+  rm -rf "${oldpwd}/"{kernel,dtbs,headers}'.tar'
   mv "${outdir}/"* "${oldpwd}/"
   rm -rf "${outdir}"
   popd >/dev/null
