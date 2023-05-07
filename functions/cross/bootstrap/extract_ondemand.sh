@@ -19,7 +19,7 @@ extract_ondemand() { # $1: extract subdir, $2 read-only, $3: strip level
     sudo rm -rf "${extract_dir}"
     if [[ ! -f "${extract_file}" || "${bootstrap_url_old_archive}" != "${bootstrap_url}" ]] ; then
       echo "  -> Downloading ${extract_file} rom ${bootstrap_url}..."
-      wget "${bootstrap_url}" -O "${extract_file}" --quiet
+      wget "${bootstrap_url}" -O "${extract_file}"
       echo "${bootstrap_url}" > "${extract_url_mark}"
     fi
     if [[ "${strip_level}" ]]; then
