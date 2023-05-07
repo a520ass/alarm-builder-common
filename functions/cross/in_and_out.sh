@@ -29,15 +29,12 @@ in_and_out() {
   echo "  -> Got out from the QEMU alarm aarch64 rootfs"
   sudo umount -R "${cross_root}"
   echo "  -> Moving things back from ArchLinuxARM AArch64 rootfs..."
-  local copy_back_list=(
-    "${dir_blob}"
-    "${dir_build}"
-    "${dir_build_cross}"
-    "${dir_pkg}"
-    "${dir_releases}"
-  )
-  sudo tar -C "${cross_project}" -c "${copy_back_list[@]}" | tar -x # One command to be atomic
-  sudo chown -R $(id --user):$(id --group)  "${copy_back_list[@]}"
+  local copy_back_folder=
+  for copy_back_folder in "${dir_blob}" "${dir_build}" "${dir_build_cross}" "${dir_pkg}" "${dir_releases}"; do
+    if sudo tar -C "${cross_project}" -c "${copy_back_folder}" | tar -x; then
+      sudo chown -R $(id --user):$(id --group) "${copy_back_folder}"
+    fi
+  done
   echo "  -> Cleaning up AArch64 cross build project"
   sudo rm -rf "${cross_project}"
   echo " => Finished in-and-out"
