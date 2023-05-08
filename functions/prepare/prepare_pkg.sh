@@ -28,13 +28,15 @@ prepare_pkg() {
     pushd "${build_pkg}" > /dev/null
     if should_build "${build_pkg}"; then
       echo "  -> Building package ${build_pkg}..."
-      local dir_build_cross_pkg="${dir_build_cross_absolute}/${build_pkg}"
-      if [[ -d "${dir_build_cross_pkg}" ]]; then
-        cross_guest_pkg='yes'
-        echo "  -> Cross build replacement for ${build_pkg} found, use ${dir_build_cross_pkg} instead"
-        pushd "${dir_build_cross_pkg}" > /dev/null
-      else
-        cross_guest_pkg=''
+      if [[ "${alarm_builder_cross_building}" ]]; then
+        local dir_build_cross_pkg="${dir_build_cross_absolute}/${build_pkg}"
+        if [[ -d "${dir_build_cross_pkg}" ]]; then
+          cross_guest_pkg='yes'
+          echo "  -> Cross build replacement for ${build_pkg} found, use ${dir_build_cross_pkg} instead"
+          pushd "${dir_build_cross_pkg}" > /dev/null
+        else
+          cross_guest_pkg=''
+        fi
       fi
       local retry=3
       local success=''
@@ -46,7 +48,7 @@ prepare_pkg() {
         fi
         echo "  -> Retrying to build package ${build_pkg}, retries left: ${retry}"
       done
-      if [[ "${cross_guest_pkg}" ]]; then
+      if [[ "${alarm_builder_cross_building}" && "${cross_guest_pkg}" ]]; then
         popd > /dev/null
         mv "${dir_build_cross_pkg}/"*'.pkg.tar' .
       fi
