@@ -43,5 +43,12 @@ setup_outside() {
     echo '  -> Setting up SSH, to allow to login as root with password'
     sudo sed -i 's|^#PermitRootLogin prohibit-password$|PermitRootLogin yes|g' "${dir_root}/etc/ssh/sshd_config"
   fi
+  local pacman_mirrorlist_pkg=$(ls "${dir_root}/var/cache/pacman/pkg/pacman-mirrorlist-"*'.pkg.tar'* | grep -v '.sig$' | tail -n 1)
+  if [[ "${pacman_mirrorlist_pkg}" ]]; then
+    echo "  -> Setting pacman mirror to geo-IP based global mirror"
+    tar -xOf "${pacman_mirrorlist_pkg}" 'etc/pacman.d/mirrorlist' | 
+      sed 's_#\(Server = .*geo.*$\)_\1_' | 
+      sudo tee "${dir_root}/etc/pacman.d/mirrorlist" > /dev/null
+  fi
   echo " => Completed basic setup outside the target root"
 }
