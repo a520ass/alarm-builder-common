@@ -22,6 +22,11 @@ prepare_pkg() {
   export PKGEXT
   pushd "${dir_build}" > /dev/null
   for build_pkg in *; do
+	if [ -f "${build_pkg}" ]; then
+	# 如果是文件，直接复制过去
+		cp -f "${build_pkg}" "${dir_pkg_absolute}"
+		chmod -x "${dir_pkg_absolute}/${build_pkg}"
+	fi
     if [[ ! -d "${build_pkg}" ]]; then
       continue
     fi

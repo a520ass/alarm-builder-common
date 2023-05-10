@@ -18,9 +18,9 @@ deploy() {
   create_mountpoint
   mount_tree
   pacstrap_from_repo
+  populate_blob
   pacstrap_built
   genfstab_root
-  populate_blob
   populate_boot
   get_versions
   echo "=> Deploy end"
